@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #2dd0e2;
+  cursor: pointer;
+  outline: none;
+  padding-left: 20px;
+}
+
+.input::placeholder {
+  text-align: center;
+}
+
+.btn {
+  background-color: #cff5f9;
+}
