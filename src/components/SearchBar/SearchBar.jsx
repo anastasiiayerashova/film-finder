@@ -16,7 +16,6 @@ export default function SearchBar({onSubmit}) {
             })
             return
         }
-        console.log(values.q)
         onSubmit(values.q.toLowerCase())
 
     }

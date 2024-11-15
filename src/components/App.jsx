@@ -7,6 +7,7 @@ import NewsCard from './NewsCard/NewsCard';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import Loader from './Loader/Loader';
+import NewsModal from './NewsModal/NewsModal';
 import { ImSad } from "react-icons/im";
 
 
@@ -17,6 +18,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
   const [results, setResults] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   useEffect(() => {
     const getData = async () => {
@@ -39,10 +42,21 @@ export default function App() {
 getData ()
   }, [query, page])
 
-  const handleChangeQuery = async (query) => {
+  const handleChangeQuery = async (newQuery) => {
+    if (newQuery===query) return
     setNews([])
     setPage(1)
-    setQuery(query)
+    setQuery(newQuery)
+  }
+
+    const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedImage(null)
   }
 
   return (
@@ -51,10 +65,9 @@ getData ()
       {isLoading && <Loader />}
       {error && <ErrorMessage/>}
       {query !== '' && news.length <= 0 && !isLoading && !error && (<p>Unfortunately, no results were found...<ImSad size={24} /></p>)}
-      <NewsList news={news} />
+      <NewsList news={news} onImageClick={openModal} />
       {news.length < results && <LoadMoreBtn setPage={setPage} />}
+      <NewsModal isOpen={isModalOpen} onRequestClose={closeModal} image={selectedImage} />
       </div>
   )
 }
-
-
