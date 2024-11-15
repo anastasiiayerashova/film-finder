@@ -3,7 +3,6 @@ import fetchData from '../news-api';
 import { useState, useEffect } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import NewsList from './NewsList/NewsList';
-import NewsCard from './NewsCard/NewsCard';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import Loader from './Loader/Loader';
